@@ -11,9 +11,22 @@ services:
     restart: always
     environment:
       POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "c3PYIn1qVaPBvdtc"
+      POSTGRES_PASSWORD: ${PGSQL_PW}
       POSTGRES_DB: "blog_express"
     ports:
       - 5432:5432
+    networks:
+      - express_stack
+
+  redis_image:
+    image: 'redis:latest'
+    container_name: redis_db
+    restart: always
+    environment:
+      - REDIS_PASSWORD=${REDIS_PW}
+      - REDIS_PORT=6379
+    ports:
+      - '6379:6379'
+    command: [ "redis-server" ]
     networks:
       - express_stack
