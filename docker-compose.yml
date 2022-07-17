@@ -1,0 +1,19 @@
+version: '3.1'
+
+networks:
+  express_stack:
+    driver: bridge
+
+services:
+  postgresql:
+    image: postgres:latest
+    container_name: postgersql_db
+    restart: always
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "c3PYIn1qVaPBvdtc"
+      POSTGRES_DB: "blog_express"
+    ports:
+      - 5432:5432
+    networks:
+      - express_stack
